@@ -68,30 +68,43 @@
           </p>
         </div>
 
-        <div class="chart-grid chart-grid--wide">
+        <div class="chart-grid chart-grid--sector">
           <article class="panel chart-panel">
-            <h3>Top-Five Share of Australian Research Block Grant Funding</h3>
-            <p class="panel-subtitle">Five largest provider shares recalculated independently each year</p>
+            <header class="chart-card-header">
+              <h3>Top-Five Share of Australian Research Block Grant Funding</h3>
+              <p class="panel-subtitle">Share of annual sector RBG received by the five largest recipients in each grant year.</p>
+            </header>
             <div
               id="concentration-chart"
               class="chart chart--line"
               role="img"
               aria-label="Line chart of the top-five share of annual research block grant funding from 2017 to 2026"
             ></div>
+            <div class="chart-takeaway">
+              <span class="chart-caption-label">Key takeaway</span>
+              <p id="concentration-takeaway">Funding remained persistently concentrated, with only a modest net change in the top-five share over the decade.</p>
+            </div>
           </article>
 
-          <article class="panel chart-panel">
-            <h3>Largest Changes in Institutional RBG Share, 2017–2026</h3>
-            <p class="panel-subtitle">Five largest gains and losses among HEP codes present in both endpoint years</p>
+          <article class="panel chart-panel chart-panel--movement">
+            <header class="chart-card-header">
+              <h3>Largest Changes in Institutional RBG Share, 2017–2026</h3>
+              <p class="panel-subtitle">Five largest gains and losses among HEP codes present in both endpoint years.</p>
+            </header>
             <div
               id="movement-chart"
               class="chart chart--movement"
               role="img"
               aria-label="Horizontal bar chart of the largest gains and losses in institutional RBG share"
             ></div>
-            <p class="chart-note">
-              Adelaide University and its predecessor institutions are excluded by the endpoint-comparability rule.
-            </p>
+            <div class="chart-takeaway">
+              <span class="chart-caption-label">Key takeaway</span>
+              <p>Individual institutional positions shifted more substantially than overall sector concentration. Values show percentage-point change in sector share, not change in nominal grant dollars.</p>
+            </div>
+            <div class="chart-method-note">
+              <span class="chart-caption-label">Method note</span>
+              <p>Only HEP codes present in both 2017 and 2026 are included. Adelaide University and its predecessor institutions are excluded because institutional structure changed.</p>
+            </div>
           </article>
         </div>
       </section>
@@ -108,6 +121,12 @@
               <option>Loading institutions…</option>
             </select>
           </div>
+        </div>
+
+        <div class="institution-focus" aria-live="polite">
+          <span>Selected institution</span>
+          <strong id="selected-institution-name">University of Technology Sydney</strong>
+          <small id="selected-institution-period">Latest allocation: 2026 grant year</small>
         </div>
 
         <div class="institution-kpis" aria-label="Selected institution indicators for the latest year">
@@ -131,24 +150,36 @@
 
         <div class="chart-grid chart-grid--explorer">
           <article class="panel chart-panel">
-            <h3 id="funding-chart-title">Institutional funding trend</h3>
-            <p class="panel-subtitle">Annual allocation by program</p>
+            <header class="chart-card-header">
+              <h3 id="funding-chart-title">Institutional RBG funding</h3>
+              <p class="panel-subtitle">Annual Total RBG allocation and its RSP and RTP components.</p>
+            </header>
             <div
               id="institution-funding-chart"
               class="chart chart--institution"
               role="img"
               aria-label="Line chart of the selected institution's RSP, RTP and total RBG allocations"
             ></div>
+            <div class="chart-method-note chart-method-note--compact">
+              <span class="chart-caption-label">How to read</span>
+              <p>Total RBG is the sum of RSP and RTP. Hover over any year to compare the three funding values.</p>
+            </div>
           </article>
           <article class="panel chart-panel">
-            <h3 id="share-chart-title">Institutional sector share</h3>
-            <p class="panel-subtitle">Share of total annual sector RBG</p>
+            <header class="chart-card-header">
+              <h3 id="share-chart-title">Institutional sector share</h3>
+              <p class="panel-subtitle">Selected institution’s share of total annual sector RBG.</p>
+            </header>
             <div
               id="institution-share-chart"
               class="chart chart--institution"
               role="img"
               aria-label="Line chart of the selected institution's share of annual sector RBG"
             ></div>
+            <div class="chart-takeaway chart-takeaway--compact">
+              <span class="chart-caption-label">Key takeaway</span>
+              <p id="institution-share-takeaway">UTS increased its share of sector RBG from approximately 1.50% in 2017 to 2.12% in 2026.</p>
+            </div>
           </article>
         </div>
 

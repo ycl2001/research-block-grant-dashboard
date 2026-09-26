@@ -112,6 +112,10 @@
     document.getElementById("top-five-change").textContent = formatMovement(end.topFiveShare - start.topFiveShare);
     document.getElementById("uts-share-2026").textContent = formatPercent(utsEnd.providerShare);
     document.getElementById("uts-share-change").textContent = formatMovement(utsEnd.providerShare - utsStart.providerShare);
+    document.getElementById("concentration-takeaway").textContent =
+      `Sector concentration remained broadly stable from ${formatPercent(start.topFiveShare)} ` +
+      `in ${START_YEAR} to ${formatPercent(end.topFiveShare)} in ${END_YEAR}, ` +
+      `a ${formatMovement(end.topFiveShare - start.topFiveShare)} net change.`;
   }
 
   function buildYearlyData(records) {
@@ -191,14 +195,33 @@
       .filter((row) => row.code === code)
       .sort((a, b) => a.year - b.year);
     if (!selected.length) return;
+    const first = selected[0];
     const latest = selected[selected.length - 1];
 
     document.getElementById("institution-total").textContent = formatCurrency(latest.totalRbg);
     document.getElementById("institution-rsp").textContent = formatCurrency(latest.rsp);
     document.getElementById("institution-rtp").textContent = formatCurrency(latest.rtp);
     document.getElementById("institution-share").textContent = formatPercent(latest.providerShare);
-    document.getElementById("funding-chart-title").textContent = `${latest.name}: funding trend`;
+    document.getElementById("selected-institution-name").textContent = latest.name;
+    document.getElementById("selected-institution-period").textContent =
+      `Metric cards show the ${latest.year} grant year`;
+    document.getElementById("funding-chart-title").textContent = `${latest.name}: RBG funding`;
     document.getElementById("share-chart-title").textContent = `${latest.name}: sector share`;
+
+    let takeaway;
+    if (first.year === latest.year) {
+      takeaway = `${latest.name} accounted for ${formatPercent(latest.providerShare)} of sector RBG in ${latest.year}.`;
+    } else {
+      const direction = latest.providerShare > first.providerShare
+        ? "increased"
+        : latest.providerShare < first.providerShare
+          ? "decreased"
+          : "was unchanged";
+      takeaway = `${latest.name} ${direction} its share of sector RBG from ` +
+        `${formatPercent(first.providerShare)} in ${first.year} to ` +
+        `${formatPercent(latest.providerShare)} in ${latest.year}.`;
+    }
+    document.getElementById("institution-share-takeaway").textContent = takeaway;
     window.DashboardCharts.renderInstitutionCharts(selected, latest.name);
     renderHdrContext(hdrRows, code);
   }
