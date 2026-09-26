@@ -8,7 +8,7 @@ A reproducible, static dashboard for exploring the distribution of Australian Re
 
 ## Dashboard
 
-GitHub Pages URL: _add the published URL after Pages is enabled for this repository_.
+[View the live dashboard](https://research-block-grant-dashboard-liart.vercel.app/)
 
 The dashboard includes:
 
@@ -85,9 +85,9 @@ Python 3 is the only local preparation dependency. The script reads `.xlsx` file
 
 The preparation script validates required columns, numeric RSP/RTP values, unique HEP-code/year records, annual coverage, and the reconciliation of `RSP + RTP` to the workbook's supplied total. It does not replace suppressed HDR values such as `<5` with zero.
 
-## GitHub Pages
+## Deployment
 
-The project has no backend or build step. To publish it, enable GitHub Pages for the repository and serve the repository root from the deployment branch. The dashboard uses relative paths, so it works from a project Pages URL.
+The dashboard is deployed on Vercel at [research-block-grant-dashboard-liart.vercel.app](https://research-block-grant-dashboard-liart.vercel.app/). The project has no backend or build step and uses relative paths, so it can also be hosted by any static-site service, including GitHub Pages.
 
 ## Limitations
 
