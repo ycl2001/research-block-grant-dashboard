@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en-AU">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta
+      name="description"
+      content="Interactive analysis of Australian Research Block Grant allocations, 2017–2026."
+    >
+    <title>Australian Research Block Grant Dashboard</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://cdn.plot.ly/plotly-2.35.2.min.js" defer></script>
+    <script src="js/charts.js" defer></script>
+    <script src="js/dashboard.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to dashboard</a>
+
+    <header class="site-header">
+      <div class="header-inner">
+        <div class="eyebrow">Australian higher education research funding</div>
+        <h1>Australian Research Block Grant Dashboard</h1>
+        <p class="subtitle">Sector concentration and institutional funding share, 2017–2026</p>
+        <p class="intro">
+          Interactive analysis of Australian Research Block Grant allocations using
+          Department of Education public data.
+        </p>
+      </div>
+    </header>
+
+    <main id="main-content" class="page-shell">
+      <div id="data-status" class="status-message" role="status" aria-live="polite">
+        Loading dashboard data…
+      </div>
+
+      <section class="kpi-grid" aria-label="Headline indicators">
+        <article class="kpi-card">
+          <p class="kpi-label">Top 5 Share — 2026</p>
+          <p class="kpi-value" id="top-five-2026">—</p>
+          <p class="kpi-note">Share of annual sector RBG</p>
+        </article>
+        <article class="kpi-card">
+          <p class="kpi-label">Change in Top 5 Share — 2017 to 2026</p>
+          <p class="kpi-value" id="top-five-change">—</p>
+          <p class="kpi-note">Percentage-point change</p>
+        </article>
+        <article class="kpi-card kpi-card--accent">
+          <p class="kpi-label">UTS Sector Share — 2026</p>
+          <p class="kpi-value" id="uts-share-2026">—</p>
+          <p class="kpi-note">HEP code 3016</p>
+        </article>
+        <article class="kpi-card kpi-card--accent">
+          <p class="kpi-label">UTS Share Change — 2017 to 2026</p>
+          <p class="kpi-value" id="uts-share-change">—</p>
+          <p class="kpi-note">Percentage-point change</p>
+        </article>
+      </section>
+
+      <section class="dashboard-section" aria-labelledby="concentration-heading">
+        <div class="section-heading">
+          <div>
+            <p class="section-kicker">Sector view</p>
+            <h2 id="concentration-heading">Funding concentration</h2>
+          </div>
+          <p class="section-summary">
+            Sector concentration remained broadly stable over the decade despite
+            movements between individual institutions.
+          </p>
+        </div>
+
+        <div class="chart-grid chart-grid--wide">
+          <article class="panel chart-panel">
+            <h3>Top-Five Share of Australian Research Block Grant Funding</h3>
+            <p class="panel-subtitle">Five largest provider shares recalculated independently each year</p>
+            <div
+              id="concentration-chart"
+              class="chart chart--line"
+              role="img"
+              aria-label="Line chart of the top-five share of annual research block grant funding from 2017 to 2026"
+            ></div>
+          </article>
+
+          <article class="panel chart-panel">
+            <h3>Largest Changes in Institutional RBG Share, 2017–2026</h3>
+            <p class="panel-subtitle">Five largest gains and losses among HEP codes present in both endpoint years</p>
+            <div
+              id="movement-chart"
+              class="chart chart--movement"
+              role="img"
+              aria-label="Horizontal bar chart of the largest gains and losses in institutional RBG share"
+            ></div>
+            <p class="chart-note">
+              Adelaide University and its predecessor institutions are excluded by the endpoint-comparability rule.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="dashboard-section" aria-labelledby="explorer-heading">
+        <div class="section-heading section-heading--controls">
+          <div>
+            <p class="section-kicker">Institution view</p>
+            <h2 id="explorer-heading">Institution Explorer</h2>
+          </div>
+          <div class="select-wrap">
+            <label for="institution-select">Select institution</label>
+            <select id="institution-select" disabled>
+              <option>Loading institutions…</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="institution-kpis" aria-label="Selected institution indicators for the latest year">
+          <article class="metric-tile">
+            <p>Total RBG</p>
+            <strong id="institution-total">—</strong>
+          </article>
+          <article class="metric-tile">
+            <p>RSP</p>
+            <strong id="institution-rsp">—</strong>
+          </article>
+          <article class="metric-tile">
+            <p>RTP</p>
+            <strong id="institution-rtp">—</strong>
+          </article>
+          <article class="metric-tile">
+            <p>Sector Share</p>
+            <strong id="institution-share">—</strong>
+          </article>
+        </div>
+
+        <div class="chart-grid chart-grid--explorer">
+          <article class="panel chart-panel">
+            <h3 id="funding-chart-title">Institutional funding trend</h3>
+            <p class="panel-subtitle">Annual allocation by program</p>
+            <div
+              id="institution-funding-chart"
+              class="chart chart--institution"
+              role="img"
+              aria-label="Line chart of the selected institution's RSP, RTP and total RBG allocations"
+            ></div>
+          </article>
+          <article class="panel chart-panel">
+            <h3 id="share-chart-title">Institutional sector share</h3>
+            <p class="panel-subtitle">Share of total annual sector RBG</p>
+            <div
+              id="institution-share-chart"
+              class="chart chart--institution"
+              role="img"
+              aria-label="Line chart of the selected institution's share of annual sector RBG"
+            ></div>
+          </article>
+        </div>
+
+        <article id="hdr-context" class="context-panel" hidden>
+          <div>
+            <p class="section-kicker">UTS only</p>
+            <h3>Research Training Context</h3>
+          </div>
+          <div id="hdr-values" class="context-values"></div>
+          <p class="context-note">
+            HDR completions are shown as contextual indicators only. Research Block Grant
+            allocations reflect multiple inputs and earlier activity; these values should not
+            be interpreted as directly causing funding-share changes.
+          </p>
+        </article>
+      </section>
+
+      <section class="dashboard-section methodology" aria-labelledby="methodology-heading">
+        <details>
+          <summary>
+            <span>
+              <span class="section-kicker">Reference</span>
+              <span id="methodology-heading" class="summary-title">Methodology, sources and limitations</span>
+            </span>
+            <span class="summary-action" aria-hidden="true">View details</span>
+          </summary>
+          <div class="methodology-content">
+            <div>
+              <h3>Data sources</h3>
+              <ul>
+                <li>
+                  Australian Government Department of Education,
+                  <a href="https://www.education.gov.au/research-block-grants">Research Block Grant allocations time series</a>.
+                </li>
+                <li>
+                  Australian Government Department of Education,
+                  <a href="https://www.education.gov.au/higher-education-statistics">Higher Degree by Research student completions time series</a>.
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h3>Metric definitions</h3>
+              <dl>
+                <dt>Total RBG</dt>
+                <dd>RSP + RTP</dd>
+                <dt>Provider Share</dt>
+                <dd>100 × provider Total RBG ÷ annual sector Total RBG</dd>
+                <dt>Top-Five Share</dt>
+                <dd>Sum of the five highest provider shares in each year</dd>
+                <dt>Share Movement</dt>
+                <dd>2026 provider share − 2017 provider share, for HEP codes present in both years</dd>
+              </dl>
+            </div>
+            <div>
+              <h3>Limitations</h3>
+              <ul>
+                <li>Allocations are formula-driven and funding share is not a measure of research quality or efficiency.</li>
+                <li>Institutions differ in discipline mix and research profile.</li>
+                <li>2021 included exceptional additional RSP funding associated with COVID-19.</li>
+                <li>The 2026 institutional structure reflects the Adelaide merger; predecessor institutions are not assigned losses.</li>
+                <li>HDR data ends earlier than the RBG allocation series and is presented only as context.</li>
+              </ul>
+            </div>
+          </div>
+        </details>
+      </section>
+    </main>
+
+    <footer>
+      <div class="footer-inner">
+        <p>Department of Education public data. Dashboard calculations are reproducible from the source workbooks.</p>
+        <a href="#main-content">Back to top</a>
+      </div>
+    </footer>
+  </body>
+</html>
